@@ -1,6 +1,6 @@
 # Makefile for deploying web to GitHub Pages
 
-BUILD_VERSION = 1.0.0
+BUILD_VERSION = 1.0.1
 GITHUB_REPO = git@github.com:Karunanidi/portofolio.git
 
 
@@ -12,5 +12,9 @@ deploy-web:
 	git branch -M main && \
 	git remote add origin $(GITHUB_REPO) && \
 	git push -uf origin main
+
+	@echo "Syncing git.."
+	git pull
+	git push 
 
 	@echo "Finished Deploy!!"
