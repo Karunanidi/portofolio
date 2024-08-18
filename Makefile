@@ -10,10 +10,10 @@ deploy-web:
 	git add . && \
 	git commit -m "Deploy Version $(BUILD_VERSION)" && \
 	git branch -M main && \
-	git push -uf origin main
+	git push -uf origin main 
 
 	@echo "Syncing git.."
-	git pull
+	git pull && \
 	git push 
 
-	@echo "Finished Deploy!!"
+	@echo "Finished Deploy!! $(BUILD_VERSION)"
