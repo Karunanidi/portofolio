@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Aplikasi HitungYuk</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-body {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      margin: 0 auto;
+    }
+
+    i {
+      font-size: 11px;
+    }
+
+    #satuan {
+      font-size: 11px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-body">
+    <h3>Aplikasi HitungYuk</h3>
+    <p>Masukkan data pada kolom berikut</p>
+    <form id="sum-form" class="requires-validation" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label><i>Masukkan angka dengan satuan <b>jam</b> :</i></label>
+        <input class="form-control" type="text" inputmode="numeric" placeholder="A" id="number1" required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" inputmode="numeric" placeholder="B" id="number2" required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" inputmode="numeric" placeholder="C" id="number3" required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" inputmode="numeric" placeholder="D" id="number4" required>
+      </div>
+      <div class="form-group">
+        <label><i>Banyak Liter <b>air</b> :</i></label>
+        <input class="form-control" type="text" inputmode="numeric" id="liter" required>
+      </div>
+      <div class="form-group">
+        <label for="" class="text-small">Logika : jika A,B,C,D mengisi air sebanyak Liter dan selama Waktu yang di input, maka jika mereka bersama - sama</label><br>
+        <label>Air akan terisi dalam :</label>
+        <input class="form-control" type="number" id="result" readonly>
+        <label><i id="satuan">*angka yang ditunjukkan dalam satuan <b>menit</b></i></label>
+      </div>
+      <button type="submit" class="btn btn-primary">Hitung</button>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
