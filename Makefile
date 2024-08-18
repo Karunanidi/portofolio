@@ -10,7 +10,6 @@ deploy-web:
 	git add . && \
 	git commit -m "Deploy Version $(BUILD_VERSION)" && \
 	git branch -M main && \
-	git remote add origin $(GITHUB_REPO) && \
 	git push -uf origin main
 
 	@echo "Syncing git.."
