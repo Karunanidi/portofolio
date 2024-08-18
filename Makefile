@@ -1,6 +1,6 @@
 # Makefile for deploying web to GitHub Pages
 
-BUILD_VERSION = 1.0.1
+BUILD_VERSION = 1.0.2
 GITHUB_REPO = git@github.com:Karunanidi/portofolio.git
 
 
