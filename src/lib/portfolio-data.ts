@@ -150,12 +150,13 @@ export const processSteps: ProcessStep[] = [
 export interface WorkItem {
   index: string;
   title: string;
-  kind: "Flutter" | "Android";
+  kind: "Flutter" | "Android" | "PWA";
   year: string;
   summary: string;
   tags: string[];
   metric: string;
   metricLabel: string;
+  href?: string;
 }
 
 export const workItems: WorkItem[] = [
@@ -202,6 +203,18 @@ export const workItems: WorkItem[] = [
     tags: ["Android", "Reporting", "RESTful API"],
     metric: "100%",
     metricLabel: "paperless service records",
+  },
+  {
+    index: "05",
+    title: "Mahirka",
+    kind: "PWA",
+    year: "2026",
+    summary:
+      "Personal build — an AI study companion for Indonesian students: chat tutor, flashcards & memory games, and PDF-to-practice pipelines. Installable as a PWA with one-time payment tiers.",
+    tags: ["Next.js", "PWA", "AI SaaS", "Solo Build"],
+    metric: "24/7",
+    metricLabel: "AI tutor for Indonesian students",
+    href: "https://mahirka.com",
   },
 ];
 
@@ -250,6 +263,23 @@ export const caseStudies: CaseStudy[] = [
       "Inventory control for spare parts and assets, live-synced",
       "Paper service logs fully replaced with digital reporting",
       "Optimized rendering for large data sets on mid-range devices",
+    ],
+  },
+  {
+    id: "mahirka",
+    kicker: "CASE STUDY — 03 · PERSONAL BUILD",
+    title: "A tutor that never sleeps",
+    subtitle: "Mahirka.com — AI study companion for Indonesian students",
+    body: "My own product, built end-to-end: an AI learning companion that helps students understand confusing material, finish homework, generate structured summaries, and drill what they learned through flashcards, quick quizzes and memory games — plus a pipeline that turns any lesson PDF into summaries and predicted exam questions. Installable as a PWA, priced with honest one-time tiers instead of subscriptions.",
+    stats: [
+      { value: "3", label: "learning modes in one app" },
+      { value: "PDF→Quiz", label: "material pipeline" },
+      { value: "PWA", label: "installable everywhere" },
+    ],
+    outcomes: [
+      "Full product live at mahirka.com — beta testing open",
+      "Free tier plus two one-time payment plans, no auto-renewal",
+      "Privacy-first: clear commitments on student data handling",
     ],
   },
 ];

@@ -64,3 +64,22 @@ Stage Summary:
 - Deliverable: cinematic scrollytelling portfolio at / — 8 scroll-driven scenes, Lenis smooth scroll, persistent scene HUD, grain/vignette film grade
 - All story content centralized in src/lib/portfolio-data.ts (real CV data preserved: Ayo Lari, Fleetify, INA17, JHL, LP3I, contacts, CV link)
 - Old generic portfolio components removed; new system in src/components/scrolly/
+
+---
+Task ID: 4
+Agent: Main Agent (Super Z)
+Task: Research mahirka.com (user's personal PWA project) and feature it in the portfolio
+
+Work Log:
+- Web search for "mahirka.com" returned no direct hits (only unrelated name matches); fetched the domain directly via curl
+- Found live Next.js/React product with manifest.json (PWA): "Mahirka — Teman Belajar Interaktif Pelajar Indonesia", AI study assistant (chat tutor, Menjadi Mahir flashcards/quizzes/memory games, PDF-to-summary/question-prediction pipeline, homework help), 3 pricing tiers (Gratis / Fokus Ulangan / Pro, one-time payment, no auto-renewal), privacy commitment section, BETA TESTING badge
+- Confirmed visually via agent-browser screenshot (warm orange education landing page)
+- portfolio-data.ts: WorkItem.kind extended with "PWA", optional href added; added work item 05 "Mahirka" (tags Next.js/PWA/AI SaaS/Solo Build, metric 24/7 AI tutor, href mahirka.com); added case study 03 "A tutor that never sleeps" (personal build) with 3 stats + 3 outcomes
+- work.tsx: WorkCard now renders as <a> when item.href exists ("VISIT SITE ↗" chip); intro text updated to "Five things..."; year labels 2024→2026
+- case-studies.tsx: stacking container height now computed from card count (3 × 100svh); heading text updated to "Three builds"
+- contact.tsx: added "MY PRODUCT — mahirka.com ↗" link row
+- Verified desktop + mobile (Mahirka card, case study 3 stack, contact rows): 0 console/page errors; ESLint clean
+
+Stage Summary:
+- Mahirka featured in 3 places: Work shelf card 05 (clickable), Case Study 03 (stacking), Contact "My product" row
+- Stacking-cards container now scales automatically with the number of case studies

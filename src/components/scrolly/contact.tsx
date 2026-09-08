@@ -73,6 +73,11 @@ export default function Contact() {
       download: true,
     },
     {
+      label: "My product",
+      value: "mahirka.com",
+      href: "https://mahirka.com",
+    },
+    {
       label: "Elsewhere",
       value: "Portfolio site",
       href: persona.portfolioLink,

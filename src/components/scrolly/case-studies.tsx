@@ -103,13 +103,16 @@ export default function CaseStudies() {
           Proof, <span className="text-stroke-signal">not</span> promises
         </h2>
         <p className="mt-6 max-w-md text-white/55 text-sm sm:text-base leading-relaxed">
-          Two builds that had to work on day one — a race in Bali and a fleet
-          that never sleeps. Numbers included.
+          Three builds that had to work on day one — a race in Bali, a fleet
+          that never sleeps, and a tutor I built myself. Numbers included.
         </p>
       </div>
 
-      {/* stacking cards */}
-      <div className="relative h-[200svh]">
+      {/* stacking cards — container height scales with card count */}
+      <div
+        className="relative"
+        style={{ height: `${caseStudies.length * 100}svh` }}
+      >
         {caseStudies.map((cs, i) => (
           <StackCard
             key={cs.id}

@@ -11,11 +11,8 @@ import { workItems, type WorkItem } from "@/lib/portfolio-data";
  */
 
 function WorkCard({ item }: { item: WorkItem }) {
-  return (
-    <article
-      data-cursor
-      className="group relative flex flex-col justify-between shrink-0 w-[82vw] sm:w-[58vw] lg:w-[44vw] xl:w-[38vw] h-[62vh] sm:h-[64vh] border border-white/12 bg-[#0a0a0a] px-6 sm:px-9 py-7 sm:py-9 hover:border-[#ff4d00]/60 transition-colors duration-500"
-    >
+  const body = (
+    <>
       <header>
         <div className="flex items-center justify-between mono-label text-white/35">
           <span>
@@ -42,13 +39,38 @@ function WorkCard({ item }: { item: WorkItem }) {
             </span>
           ))}
         </div>
-        <div className="border-t border-white/10 pt-4 flex items-baseline gap-3">
-          <span className="font-mono font-bold text-2xl sm:text-4xl text-[#ff4d00] tabular-nums">
-            {item.metric}
+        <div className="border-t border-white/10 pt-4 flex items-baseline justify-between gap-3">
+          <span className="flex items-baseline gap-3">
+            <span className="font-mono font-bold text-2xl sm:text-4xl text-[#ff4d00] tabular-nums">
+              {item.metric}
+            </span>
+            <span className="mono-label text-white/40">{item.metricLabel}</span>
           </span>
-          <span className="mono-label text-white/40">{item.metricLabel}</span>
+          {item.href && (
+            <span className="mono-label text-[#f2efe9] group-hover:text-[#ff4d00] transition-colors shrink-0">
+              Visit site ↗
+            </span>
+          )}
         </div>
       </footer>
+    </>
+  );
+
+  const cls = "group relative flex flex-col justify-between shrink-0 w-[82vw] sm:w-[58vw] lg:w-[44vw] xl:w-[38vw] h-[62vh] sm:h-[64vh] border border-white/12 bg-[#0a0a0a] px-6 sm:px-9 py-7 sm:py-9 hover:border-[#ff4d00]/60 transition-colors duration-500";
+
+  return item.href ? (
+    <a
+      href={item.href}
+      target="_blank"
+      rel="noreferrer"
+      data-cursor
+      className={cls}
+    >
+      {body}
+    </a>
+  ) : (
+    <article data-cursor className={cls}>
+      {body}
     </article>
   );
 }
@@ -90,8 +112,8 @@ export default function Work() {
               <span className="text-stroke">work</span>
             </h2>
             <p className="mt-6 max-w-xs text-white/55 text-sm sm:text-base leading-relaxed">
-              Four things I shipped that met real users. Keep scrolling — the
-              shelf slides sideways.
+              Five things I shipped that met real users — four on the job, one
+              of my own. Keep scrolling — the shelf slides sideways.
             </p>
             <div className="mt-8 mono-label text-[#ff4d00] flex items-center gap-3">
               <span className="h-px w-10 bg-[#ff4d00]" />
@@ -123,7 +145,7 @@ export default function Work() {
           </div>
           <div className="mt-3 flex justify-between mono-label text-white/30">
             <span>2024</span>
-            <span>2025</span>
+            <span>2026</span>
           </div>
         </div>
       </div>
