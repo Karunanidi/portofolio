@@ -1,287 +1,315 @@
-import {
-  Flame,
-  Cloud,
-  GitBranch,
-  Smartphone,
-  Globe,
-  Palette,
-  Film,
-  Network,
-  Database,
-  Wrench,
-  Users,
-  Handshake,
-  Boxes,
-  Rocket,
-  Code2,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+/* ------------------------------------------------------------------ */
+/*  Trisna Nur Arief — scrollytelling story data                       */
+/*  Every word of the story lives here. Edit this file to edit the     */
+/*  narrative; components only render what is defined below.           */
+/* ------------------------------------------------------------------ */
 
-/* ---------------------------------- nav ----------------------------------- */
+export const persona = {
+  name: "Trisna Nur Arief",
+  firstName: "Trisna",
+  role: "Mobile Developer",
+  location: "South Tangerang, Indonesia",
+  coordinates: "6.3024° S / 106.6528° E",
+  email: "trisna.na@gmail.com",
+  whatsapp: "+62 878-7551-9249",
+  whatsappLink: "https://wa.me/6287875519249",
+  portfolioLink: "https://bit.ly/3Zr3t03",
+  cvLink: "/cv/CV_Trisna_Nur_Arief_Mobile_Developer.pdf",
+};
 
-export const navLinks = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "contact", label: "Contact" },
+/* ------------------------------ preloader -------------------------- */
+
+export const bootLines = [
+  "MOUNTING /dev/story",
+  "LINKING flutter_engine … OK",
+  "RESTORING SESSION 2023 → 2026",
+  "CACHE HIT — 4 PROJECTS, 3 SCENES",
+  "CALIBRATING SCROLL VELOCITY",
+  "READY",
 ];
 
-/* ---------------------------------- types --------------------------------- */
+/* -------------------------------- hero ----------------------------- */
 
-export type ProjectCategory = "all" | "flutter" | "android";
+export const heroWords = [
+  "MOBILE APPS",
+  "FLUTTER APPS",
+  "ANDROID APPS",
+  "REAL PRODUCTS",
+];
 
-export interface Project {
-  title: string;
-  category: Exclude<ProjectCategory, "all">;
-  description: string;
-  tags: string[];
-  gradient: string;
-  icon: "run" | "truck" | "box" | "log";
-  highlight: string;
-  year: string;
-}
+export const heroTagline =
+  "From first commit to Play Store release — real-time tracking, Firebase, and everything that keeps five thousand runners moving.";
 
-export interface Skill {
-  name: string;
-  level: number;
-  icon: LucideIcon;
-  color: string;
-}
+/* ----------------------------- manifesto --------------------------- */
 
-export interface SkillGroup {
+export const manifesto =
+  "I turn ideas into production apps. Two years in, thousands of users served, one obsession — software that survives contact with the real world.";
+
+export const manifestoStats = [
+  { value: "2+", label: "Years shipping" },
+  { value: "5,000+", label: "Users served" },
+  { value: "-30%", label: "Crash incidents" },
+  { value: "100%", label: "On-time releases" },
+];
+
+/* ------------------------------ the stack -------------------------- */
+
+export interface StackLayer {
   id: string;
   title: string;
-  subtitle: string;
-  skills: Skill[];
+  role: string;
+  nodes: string[];
 }
 
-export interface ExperienceItem {
-  role: string;
-  company: string;
+/* Ordered bottom-up: platform → cloud. The diagram assembles as you scroll. */
+export const stackLayers: StackLayer[] = [
+  {
+    id: "ui",
+    title: "UI Layer",
+    role: "What the user touches",
+    nodes: ["Flutter Widgets", "Material 3", "Custom Canvas", "Animations"],
+  },
+  {
+    id: "state",
+    title: "State & Logic",
+    role: "How the app thinks",
+    nodes: ["BLoC / Provider", "Streams", "Local Sync"],
+  },
+  {
+    id: "services",
+    title: "Services",
+    role: "How the app talks",
+    nodes: ["REST APIs", "Firebase Auth", "FCM Push", "Analytics", "Crashlytics"],
+  },
+  {
+    id: "data",
+    title: "Data",
+    role: "Where it lives",
+    nodes: ["SQLite", "SQL Server", "Realtime Sync"],
+  },
+  {
+    id: "platform",
+    title: "Platform",
+    role: "Where it runs",
+    nodes: ["Android SDK", "Java / Kotlin", "Location Services", "Play Store"],
+  },
+];
+
+export const stackFootnote =
+  "Every layer below the pixel has to hold — or the pixel doesn't matter.";
+
+/* ------------------------------- process --------------------------- */
+
+export interface ProcessStep {
+  id: string;
+  title: string;
+  line: string;
+  detail: string;
+}
+
+export const processSteps: ProcessStep[] = [
+  {
+    id: "01",
+    title: "Understand",
+    line: "Define the problem before writing a line.",
+    detail:
+      "A fitness app for a Telkomsel 5K run. A fleet system that talks to IoT sensors. The problem comes first — the stack is just the answer.",
+  },
+  {
+    id: "02",
+    title: "Design",
+    line: "Shape the flow: screens, state, data, failure modes.",
+    detail:
+      "Offline states. Race-day traffic spikes. GPS that lies. Designing for the worst day is what makes the best day feel effortless.",
+  },
+  {
+    id: "03",
+    title: "Build",
+    line: "Turn decisions into Flutter and native Android.",
+    detail:
+      "Cross-platform when speed matters, native when the platform demands it. Clean modules, typed APIs, no mystery code.",
+  },
+  {
+    id: "04",
+    title: "Ship",
+    line: "Production is the real test.",
+    detail:
+      "Staged rollouts, Crashlytics on every build, Play Store releases 100% on time. Shipping isn't the end of the work — it's the start of the evidence.",
+  },
+  {
+    id: "05",
+    title: "Evolve",
+    line: "Software is never finished.",
+    detail:
+      "Crash rates cut 30% by watching what real users do. Every release teaches the next one. The backlog is a feature, not a failure.",
+  },
+];
+
+/* ------------------------------- projects -------------------------- */
+
+export interface WorkItem {
+  index: string;
+  title: string;
+  kind: "Flutter" | "Android";
+  year: string;
+  summary: string;
+  tags: string[];
+  metric: string;
+  metricLabel: string;
+}
+
+export const workItems: WorkItem[] = [
+  {
+    index: "01",
+    title: "Ayo Lari",
+    kind: "Flutter",
+    year: "2024",
+    summary:
+      "Fitness tracking app for Telkomsel's Cooltura Run 5K — real-time location tracking, live leaderboards, the full Firebase suite.",
+    tags: ["Flutter", "Realtime GPS", "Firebase", "REST API"],
+    metric: "5,000+",
+    metricLabel: "runners on race day",
+  },
+  {
+    index: "02",
+    title: "Fleetify FMS",
+    kind: "Android",
+    year: "2025",
+    summary:
+      "Native Android app for an IoT-powered fleet management platform — thousands of data points, buttery-smooth lists.",
+    tags: ["Android", "Java", "IoT", "Logistics"],
+    metric: "IoT",
+    metricLabel: "live vehicle telemetry",
+  },
+  {
+    index: "03",
+    title: "Stocking & Inventory",
+    kind: "Android",
+    year: "2025",
+    summary:
+      "Spare-parts and asset inventory module — the backbone of vehicle inventory control, synced live with the backend dashboard.",
+    tags: ["Android", "Inventory", "Data Sync"],
+    metric: "0",
+    metricLabel: "lost spare parts on my watch",
+  },
+  {
+    index: "04",
+    title: "Digital Service Logs",
+    kind: "Android",
+    year: "2025",
+    summary:
+      "Paper service logs, retired. A mobile reporting flow for routine vehicle maintenance, history and item usage via REST APIs.",
+    tags: ["Android", "Reporting", "RESTful API"],
+    metric: "100%",
+    metricLabel: "paperless service records",
+  },
+];
+
+/* ----------------------------- case studies ------------------------ */
+
+export interface CaseStudy {
+  id: string;
+  kicker: string;
+  title: string;
+  subtitle: string;
+  body: string;
+  stats: { value: string; label: string }[];
+  outcomes: string[];
+}
+
+export const caseStudies: CaseStudy[] = [
+  {
+    id: "ayolari",
+    kicker: "CASE STUDY — 01",
+    title: "Rebuilding race day for 5,000 runners",
+    subtitle: "Ayo Lari × Telkomsel Cooltura Run 5K 2024, Bali",
+    body: "When Indonesia's biggest telco threw a 5K run in Bali, the event needed an app that could track hundreds of runners moving at once — and never crash mid-race. I built it in Flutter: real-time GPS tracking, live results through REST APIs, Firebase auth, push notifications, analytics and Crashlytics wired into every release.",
+    stats: [
+      { value: "5,000+", label: "participants tracked" },
+      { value: "100%", label: "on-time releases" },
+      { value: "5K", label: "meters, accurately measured" },
+    ],
+    outcomes: [
+      "Real-time location tracking that survived race-day load",
+      "Zero missed Play Store deadlines across the season",
+      "Crash incidents down 30% via Crashlytics-driven fixes",
+    ],
+  },
+  {
+    id: "fleetify",
+    kicker: "CASE STUDY — 02",
+    title: "Making heavy data feel weightless",
+    subtitle: "Fleetify.id — IoT-powered Fleet Management System",
+    body: "Fleet management means relentless data: vehicles, sensors, service records, spare parts. My modules — fleet maintenance, stocking & inventory, digital service logs — had to stay smooth while syncing everything with the backend dashboard in real time. Heavy lists, live telemetry, and an interface drivers actually use.",
+    stats: [
+      { value: "3", label: "production modules shipped" },
+      { value: "IoT", label: "telemetry integrated" },
+      { value: "Real-time", label: "backend sync" },
+    ],
+    outcomes: [
+      "Inventory control for spare parts and assets, live-synced",
+      "Paper service logs fully replaced with digital reporting",
+      "Optimized rendering for large data sets on mid-range devices",
+    ],
+  },
+];
+
+/* ------------------------------ timeline ---------------------------- */
+
+export interface Chapter {
   period: string;
-  description: string;
-  achievements: string[];
+  place: string;
+  role: string;
+  story: string;
+  marks: string[];
   current?: boolean;
 }
 
-/* ---------------------------------- hero ---------------------------------- */
-
-export const roles = [
-  "Mobile App Developer",
-  "Flutter Developer",
-  "Android Developer",
-  "Tech & Design Enthusiast",
-];
-
-export const heroStats = [
-  { value: 2, suffix: "+", label: "Years Experience" },
-  { value: 5, suffix: "K+", label: "App Users" },
-  { value: 30, suffix: "%", label: "Crash Reduction" },
-];
-
-export const marqueeTech = [
-  "Flutter", "Dart", "Android", "Java", "Kotlin", "Firebase",
-  "REST APIs", "Git", "SQL Server", "HTML", "CSS", "JavaScript",
-  "PHP", "Mikrotik", "Premiere Pro", "CapCut",
-];
-
-/* ---------------------------------- about --------------------------------- */
-
-export const aboutParagraphs = [
-  "I'm a mobile developer from South Tangerang, Indonesia, with a solid foundation in software engineering from my Informatics Management degree at Politeknik LP3I Jakarta. Currently, I work as an Android Mobile Developer at Fleetify.id, a fast-growing Fleet Management System (FMS) provider integrating IoT and logistics solutions.",
-  "Before that, I built cross-platform apps with Flutter at PT Indonesia Satu Tujuh (INA17) — including the \"Ayo Lari\" fitness tracking app powering Telkomsel's Cooltura Run 5K 2024, used by more than 5,000 participants. I integrated real-time location tracking, REST APIs, and the full Firebase suite, while keeping releases 100% on time on the Play Store.",
-  "My journey started in IT support at JHL Solitaire, a luxury 5-star hotel, where I learned networking, servers, and Mikrotik infrastructure the hands-on way. Outside of code, I'm into design and videography — editing with Adobe Premiere Pro, Illustrator, and CapCut — plus singing and sports.",
-];
-
-export const aboutHighlights = [
-  { title: "Flutter & Cross-Platform", text: "Flutter/Dart apps with real-time tracking, Firebase services & smooth Play Store releases." },
-  { title: "Native Android", text: "Android Studio (Java/Kotlin), RESTful API integration & data-heavy fleet modules." },
-  { title: "Design & Infra", text: "SQL Server, Mikrotik networking, Adobe Premiere Pro, Illustrator & CapCut." },
-];
-
-/* ---------------------------------- skills -------------------------------- */
-
-export const skillGroups: SkillGroup[] = [
+export const chapters: Chapter[] = [
   {
-    id: "mobile",
-    title: "Mobile Development",
-    subtitle: "Shipping production apps to real users",
-    skills: [
-      { name: "Flutter / Dart", level: 90, icon: Zap, color: "text-cyan-300" },
-      { name: "Firebase Suite", level: 88, icon: Flame, color: "text-amber-300" },
-      { name: "REST API Integration", level: 90, icon: Network, color: "text-emerald-300" },
-      { name: "Android Studio (Java)", level: 84, icon: Smartphone, color: "text-lime-300" },
-      { name: "Kotlin", level: 75, icon: Code2, color: "text-violet-300" },
-      { name: "Play Store Deployment", level: 92, icon: Rocket, color: "text-teal-300" },
-      { name: "Git Version Control", level: 86, icon: GitBranch, color: "text-rose-300" },
-      { name: "SQL Server", level: 80, icon: Database, color: "text-orange-300" },
-    ],
-  },
-  {
-    id: "web-design",
-    title: "Web, Design & Video",
-    subtitle: "The supporting toolkit behind my projects",
-    skills: [
-      { name: "HTML / CSS / JS", level: 84, icon: Globe, color: "text-teal-300" },
-      { name: "PHP Framework", level: 76, icon: Wrench, color: "text-violet-200" },
-      { name: "Adobe Premiere Pro", level: 82, icon: Film, color: "text-rose-300" },
-      { name: "Adobe Photoshop", level: 78, icon: Palette, color: "text-amber-300" },
-      { name: "Adobe Illustrator", level: 74, icon: Palette, color: "text-lime-300" },
-      { name: "CapCut Editing", level: 85, icon: Film, color: "text-cyan-200" },
-      { name: "Mikrotik Networking", level: 72, icon: Network, color: "text-emerald-300" },
-      { name: "Microsoft Office", level: 88, icon: Database, color: "text-orange-300" },
-    ],
-  },
-];
-
-export const otherTools = [
-  { name: "Crashlytics Debugging", icon: Flame },
-  { name: "Cloud & Hosting Basics", icon: Cloud },
-  { name: "ERP Systems", icon: Boxes },
-  { name: "System Design Analysis", icon: Boxes },
-  { name: "Agile Teamwork", icon: Handshake },
-  { name: "Leadership (BEM LP3I)", icon: Users },
-];
-
-/* --------------------------------- projects ------------------------------- */
-
-export const projectFilters: { value: ProjectCategory; label: string }[] = [
-  { value: "all", label: "All Projects" },
-  { value: "flutter", label: "Flutter" },
-  { value: "android", label: "Android" },
-];
-
-export const projects: Project[] = [
-  {
-    title: "Ayo Lari — Fitness Tracking App",
-    category: "flutter",
-    description:
-      "Flutter fitness tracking app for Telkomsel's Cooltura Run 5K 2024, used by 5,000+ participants. Features real-time location tracking, REST APIs and the full Firebase suite — auth, push notifications, analytics and Crashlytics.",
-    tags: ["Flutter", "Dart", "Firebase", "REST API", "Location Tracking"],
-    gradient: "from-emerald-500/25 via-teal-500/15 to-transparent",
-    icon: "run",
-    highlight: "5,000+ participants",
-    year: "2024",
-  },
-  {
-    title: "Fleetify.id — Fleet Management App",
-    category: "android",
-    description:
-      "Native Android app for a fast-growing Fleet Management System (FMS) provider integrating IoT and logistics. Optimized for large data lists with smooth UX during heavy data input, synchronized with the backend dashboard.",
-    tags: ["Android", "Java", "REST API", "IoT", "Fleet & Logistics"],
-    gradient: "from-violet-500/25 via-fuchsia-500/10 to-transparent",
-    icon: "truck",
-    highlight: "IoT-powered FMS",
-    year: "2025",
-  },
-  {
-    title: "Stocking & Inventory Module",
-    category: "android",
-    description:
-      "Fleetify.id module ensuring accurate data entry for spare parts and asset management — the backbone of vehicle inventory control, synced in real time with the company's backend dashboard.",
-    tags: ["Android", "Inventory", "Asset Management", "Data Sync"],
-    gradient: "from-amber-500/25 via-orange-500/10 to-transparent",
-    icon: "box",
-    highlight: "Inventory control",
-    year: "2025",
-  },
-  {
-    title: "Digital Service Log Reporting",
-    category: "android",
-    description:
-      "Digital reporting feature for routine vehicle service logs, replacing manual paper processes with an efficient mobile interface. Handles detailed service history and item usage via RESTful APIs.",
-    tags: ["Android", "Reporting", "RESTful API", "Service History"],
-    gradient: "from-rose-500/25 via-pink-500/10 to-transparent",
-    icon: "log",
-    highlight: "Paperless operations",
-    year: "2025",
-  },
-];
-
-/* -------------------------------- experience ------------------------------ */
-
-export const experiences: ExperienceItem[] = [
-  {
+    period: "2025 — Now",
+    place: "Fleetify.id",
     role: "Android Mobile Developer",
-    company: "Fleetify.id",
-    period: "Nov 2025 — Present",
-    description:
-      "Building fleet management modules at a fast-growing FMS provider integrating IoT and logistics solutions.",
-    achievements: [
-      "Focusing on FMS modules for vehicle maintenance and inventory control",
-      "Developing digital reporting for routine service logs, replacing manual processes",
-      "Building and maintaining the \"Stocking & Inventory\" module for spare parts and assets",
-      "Integrating complex RESTful APIs and optimizing performance for large data lists",
-    ],
+    story: "Building the modules fleet operators rely on — maintenance, inventory, digital service logs — for an IoT-first fleet management platform.",
+    marks: ["Native Android", "IoT integration", "Data-heavy UI"],
     current: true,
   },
   {
-    role: "Mobile Developer (Flutter)",
-    company: "PT. Indonesia Satu Tujuh (INA17)",
-    period: "Feb 2024 — Oct 2025",
-    description:
-      "Cross-platform mobile development at a holding company focused on mobile apps and MNO's VAS platform.",
-    achievements: [
-      "Shipped \"Ayo Lari\" fitness app for Telkomsel's Cooltura Run 5K 2024 — 5,000+ participants",
-      "Integrated real-time location tracking, REST APIs and Firebase services (auth, FCM, analytics, Crashlytics)",
-      "Improved app reliability by 30%, cutting crash incidents with Firebase Crashlytics",
-      "Led deployments to production, maintaining 100% on-time Play Store updates with a 5+ dev team",
-    ],
+    period: "2024 — 2025",
+    place: "PT Indonesia Satu Tujuh",
+    role: "Mobile Developer — Flutter",
+    story: "Cross-platform apps for a telco-VAS holding company. Shipped Ayo Lari for Telkomsel's Cooltura Run, led Play Store releases with a five-dev team.",
+    marks: ["Flutter", "Firebase suite", "Ayo Lari"],
   },
   {
-    role: "IT Support (Internship)",
-    company: "JHL Solitaire Gading Serpong",
-    period: "Aug 2023 — Jan 2024",
-    description:
-      "IT operations at a luxury 5-star hotel with 141 premier rooms and high-tech facilities.",
-    achievements: [
-      "Handled daily technical operations, supporting 50+ staff and critical IT infrastructure",
-      "Documented 10+ IT infrastructure processes, aiding internal knowledge transfer",
-      "Assisted migration of servers, storage, Mikrotik routers and access points — improving network uptime by 20%",
-    ],
+    period: "2023 — 2024",
+    place: "JHL Solitaire",
+    role: "IT Support — Internship",
+    story: "Five-star hotel, 141 rooms, zero tolerance for downtime. Servers, Mikrotik networks, and the people skills that come from fixing things live.",
+    marks: ["Networking", "Mikrotik", "Infrastructure"],
   },
   {
-    role: "Informatics Management Student",
-    company: "Politeknik LP3I Jakarta",
-    period: "Sep 2020 — Jul 2025",
-    description:
-      "Studied web & mobile programming, database administration, system design and ERP — while serving in the Student Executive Board (BEM LP3I Jakarta) internal control unit.",
-    achievements: [
-      "Built dynamic websites with HTML, CSS, JS and PHP frameworks",
-      "Administered SQL Server databases: extract, transform and load data",
-      "Developed Android apps in Android Studio (Java) as mobile programming focus",
-    ],
+    period: "2020 — 2025",
+    place: "Politeknik LP3I Jakarta",
+    role: "Informatics Management",
+    story: "Where it started: web programming, SQL Server, system design — and Android Studio in Java, which quietly became the whole direction.",
+    marks: ["SQL Server", "PHP", "Android (Java)"],
   },
 ];
 
-/* --------------------------------- contact -------------------------------- */
+/* ------------------------------- contact ---------------------------- */
 
-export const socials = [
-  {
-    name: "Portfolio",
-    href: "https://bit.ly/3Zr3t03",
-    label: "Portfolio website",
-  },
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/6287875519249",
-    label: "Chat on WhatsApp",
-  },
-  {
-    name: "Email",
-    href: "mailto:trisna.na@gmail.com",
-    label: "Send an email",
-  },
+export const contactTitle = ["LET'S BUILD", "WHAT'S NEXT"];
+
+export const marqueeWords = [
+  "FLUTTER",
+  "ANDROID",
+  "FIREBASE",
+  "REAL-TIME",
+  "PLAY STORE",
+  "IOT",
+  "DART",
+  "KOTLIN",
 ];
 
-export const contactInfo = [
-  { label: "Email", value: "trisna.na@gmail.com", icon: "mail" },
-  { label: "WhatsApp", value: "+62 878-7551-9249", icon: "phone" },
-  { label: "Location", value: "South Tangerang, Indonesia", icon: "pin" },
-];
-
-export const cvFileName = "CV_Trisna_Nur_Arief_Mobile_Developer.pdf";
-export const cvLink = `/cv/${cvFileName}`;
+export const footerNote = "Designed & built by Trisna Nur Arief — South Tangerang, Indonesia";

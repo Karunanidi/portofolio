@@ -1,0 +1,125 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { caseStudies, type CaseStudy } from "@/lib/portfolio-data";
+
+/**
+ * SCENE 06 — Proof.
+ * Heading, then two case studies implemented as sticky stacking cards:
+ * each new card slides up over the previous one, which scales back.
+ */
+
+function StackCard({
+  cs,
+  index,
+  total,
+  progress,
+}: {
+  cs: CaseStudy;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const coverStart = (index + 1) / total;
+  const coverEnd = Math.min(coverStart + 1 / total, 1);
+  const scale = useTransform(progress, [coverStart, coverEnd], [1, 0.92]);
+  const dim = useTransform(progress, [coverStart, coverEnd], [0, 0.6]);
+
+  return (
+    <div
+      className="sticky top-0 h-svh flex items-center px-5 sm:px-10 py-16"
+      style={{ zIndex: index + 1 }}
+    >
+      <motion.article
+        style={{ scale }}
+        className="relative w-full max-w-6xl mx-auto border border-white/12 bg-[#0a0a0a] px-6 sm:px-10 lg:px-14 py-8 sm:py-12 max-h-[86svh] overflow-y-auto no-scrollbar"
+      >
+        <header>
+          <p className="mono-label text-[#ff4d00]">{cs.kicker}</p>
+          <h3 className="mt-4 sm:mt-5 font-black uppercase tracking-[-0.02em] leading-[0.98] text-[clamp(1.7rem,4.2vw,3.6rem)]">
+            {cs.title}
+          </h3>
+          <p className="mt-2 sm:mt-3 font-mono text-[11px] sm:text-xs tracking-[0.14em] uppercase text-white/40">
+            {cs.subtitle}
+          </p>
+        </header>
+
+        <div className="mt-6 sm:mt-9 grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-14">
+          <p className="text-white/60 text-sm sm:text-base leading-relaxed">
+            {cs.body}
+          </p>
+
+          <div>
+            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5 border-t lg:border-t-0 border-white/10 pt-5 lg:pt-0">
+              {cs.stats.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-mono font-bold text-xl sm:text-3xl text-[#f2efe9] tabular-nums">
+                    {stat.value}
+                  </p>
+                  <p className="mono-label text-white/35 mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <ul className="mt-6 sm:mt-8 space-y-3">
+              {cs.outcomes.map((outcome) => (
+                <li
+                  key={outcome}
+                  className="flex gap-3 text-sm sm:text-[15px] text-white/70 leading-snug"
+                >
+                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 bg-[#ff4d00]" />
+                  {outcome}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* cover dim overlay */}
+        <motion.div
+          style={{ opacity: dim }}
+          className="pointer-events-none absolute inset-0 bg-black"
+          aria-hidden
+        />
+      </motion.article>
+    </div>
+  );
+}
+
+export default function CaseStudies() {
+  const wrapRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: wrapRef,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <section id="proof" data-scene="proof" ref={wrapRef} className="relative">
+      {/* heading block */}
+      <div className="px-5 sm:px-10 pt-24 sm:pt-36 pb-14 sm:pb-20">
+        <p className="mono-label text-white/40 mb-6">SCENE 06 — PROOF</p>
+        <h2 className="font-black uppercase tracking-[-0.02em] leading-[0.94] text-[clamp(2.6rem,8vw,7rem)] max-w-5xl">
+          Proof, <span className="text-stroke-signal">not</span> promises
+        </h2>
+        <p className="mt-6 max-w-md text-white/55 text-sm sm:text-base leading-relaxed">
+          Two builds that had to work on day one — a race in Bali and a fleet
+          that never sleeps. Numbers included.
+        </p>
+      </div>
+
+      {/* stacking cards */}
+      <div className="relative h-[200svh]">
+        {caseStudies.map((cs, i) => (
+          <StackCard
+            key={cs.id}
+            cs={cs}
+            index={i}
+            total={caseStudies.length}
+            progress={scrollYProgress}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

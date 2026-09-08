@@ -42,3 +42,25 @@ Stage Summary:
 - Key files: src/lib/portfolio-data.ts (edit persona/content here), src/components/portfolio/* (8 components)
 - All animations via framer-motion; content centralized in data file for easy customization
 - Verified interactive flows via browser automation; no runtime errors in dev.log
+
+---
+Task ID: 3
+Agent: Main Agent (Super Z)
+Task: Rebuild portfolio as scrollytelling site referencing jeffmilanes.com — "make it better"
+
+Work Log:
+- Researched reference: Cloudflare blocked headless browser; extracted full structure via curl (boot preloader → kinetic hero "I BUILD" → pinned architecture diagram → pinned process steps → case studies → contact)
+- Installed lenis for inertia smooth scroll (native scroll position kept so useScroll/sticky/anchors still work)
+- Rewrote design system in globals.css: cinematic near-black #050505, warm paper #f2efe9, international orange #ff4d00 signal color (replaces emerald "AI slop" palette); film grain overlay, vignette, blueprint grid, text-stroke utilities, boot blink, cue-drop, marquee
+- layout.tsx: Archivo (display) + JetBrains Mono (mono) via next/font; new SEO metadata
+- Rewrote portfolio-data.ts as story data: bootLines, heroWords, manifesto + stats, 5 stack layers, 5 process steps, 4 work items, 2 case studies, 4 chapters, contact — all Trisna's real CV content
+- Built src/components/scrolly/: preloader (boot % → shutter reveal, self-unmounting), smooth-scroll (Lenis + anchor interception), cursor (dot+ring, fine-pointer only), hud (progress hairline + SCENE 01/08 indicator via IntersectionObserver), hero (kinetic rotating words w/ per-word auto sizing + parallax exit), manifesto (280vh pinned word-by-word opacity reveal + stats), stack-diagram (340vh pinned, spine draws, 5 layers + 20 chips assemble), process (400vh pinned, 5 crossfading steps + ghost numerals + rail), work (380vh pinned horizontal shelf, measured scrollWidth, intro panel + 4 cards + progress), case-studies (sticky stacking cards w/ scale + dim), timeline (editorial rows, sticky period col), contact (marquee, giant CTA, copy-email w/ "Copied ✓", link rows, Jakarta clock footer)
+- page.tsx assembles 8 scenes with data-scene attributes; scrollRestoration manual
+- Deleted old src/components/portfolio/ (10 files)
+- Fixes during verification: hero tagline vs HUD overlap (padding), rotating word overflow (kineticSize per word length), rotating-word mask height resolving against wrong font-size on mobile, cursor setState-in-effect lint error
+- Verified via Agent Browser: desktop 1440×900 (all 8 scenes screenshotted, word rotation cycled, copy-email → "COPIED ✓", CV HTTP 200), mobile 390×844 (hero, work shelf, process), fresh load + scroll: 0 console errors, 0 page errors; eslint clean
+
+Stage Summary:
+- Deliverable: cinematic scrollytelling portfolio at / — 8 scroll-driven scenes, Lenis smooth scroll, persistent scene HUD, grain/vignette film grade
+- All story content centralized in src/lib/portfolio-data.ts (real CV data preserved: Ayo Lari, Fleetify, INA17, JHL, LP3I, contacts, CV link)
+- Old generic portfolio components removed; new system in src/components/scrolly/
