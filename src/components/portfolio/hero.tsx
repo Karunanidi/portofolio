@@ -8,7 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { ArrowRight, Download, ChevronDown, Smartphone, Globe, Terminal } from "lucide-react";
-import { roles, heroStats } from "@/lib/portfolio-data";
+import { roles, heroStats, cvLink, cvFileName } from "@/lib/portfolio-data";
 
 /* ------------------------------ typing effect ----------------------------- */
 
@@ -46,9 +46,9 @@ function useTypingEffect(words: string[]) {
 
 const codeLines = [
   { indent: 0, parts: [["const ", "text-violet-400"], ["developer", "text-sky-300"], [" = {", "text-zinc-300"]] },
-  { indent: 1, parts: [["name", "text-emerald-300"], [": ", "text-zinc-400"], ["'Alex Carter'", "text-amber-300"], [",", "text-zinc-400"]] },
-  { indent: 1, parts: [["stack", "text-emerald-300"], [": [", "text-zinc-400"], ["'web'", "text-amber-300"], [", ", "text-zinc-400"], ["'android'", "text-amber-300"], [", ", "text-zinc-400"], ["'backend'", "text-amber-300"], ["],", "text-zinc-400"]] },
-  { indent: 1, parts: [["passion", "text-emerald-300"], [": ", "text-zinc-400"], ["'shipping clean code'", "text-amber-300"], [",", "text-zinc-400"]] },
+  { indent: 1, parts: [["name", "text-emerald-300"], [": ", "text-zinc-400"], ["'Trisna Nur Arief'", "text-amber-300"], [",", "text-zinc-400"]] },
+  { indent: 1, parts: [["focus", "text-emerald-300"], [": [", "text-zinc-400"], ["'flutter'", "text-amber-300"], [", ", "text-zinc-400"], ["'android'", "text-amber-300"], [", ", "text-zinc-400"], ["'web'", "text-amber-300"], ["],", "text-zinc-400"]] },
+  { indent: 1, parts: [["passion", "text-emerald-300"], [": ", "text-zinc-400"], ["'smooth mobile apps'", "text-amber-300"], [",", "text-zinc-400"]] },
   { indent: 1, parts: [["coffee", "text-emerald-300"], [": ", "text-zinc-400"], [true, "text-rose-300"], [",", "text-zinc-400"]] },
   { indent: 0, parts: [["};", "text-zinc-300"]] },
 ] as const;
@@ -109,7 +109,7 @@ function AnimatedCodeWindow() {
         className="-left-3 top-6 sm:-left-8"
         delay={2.6}
         icon={<Globe className="h-4 w-4 text-cyan-300" />}
-        label="Web"
+        label="Flutter"
       />
       <FloatBadge
         className="-bottom-5 right-5 sm:-right-7 sm:top-1/3"
@@ -214,7 +214,7 @@ export function Hero() {
             Hi, I&apos;m{" "}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
-                Alex Carter
+                Trisna Nur Arief
               </span>
               <motion.span
                 initial={{ scaleX: 0 }}
@@ -244,9 +244,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg lg:mx-0"
           >
-            I build end-to-end digital products — from responsive web platforms
-            with React &amp; Node.js to polished native Android apps with Kotlin
-            &amp; Jetpack Compose.
+            I craft polished mobile apps with Flutter &amp; native Android — from
+            a fitness tracker used by 5,000+ runners at Telkomsel&apos;s Cooltura
+            Run, to IoT-powered fleet management systems.
           </motion.p>
 
           {/* CTAs — 44px+ touch targets */}
@@ -265,15 +265,16 @@ export function Hero() {
               View My Work
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </motion.button>
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              href={cvLink}
+              download={cvFileName}
               className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-100 backdrop-blur transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/10 hover:text-emerald-300 sm:w-auto sm:text-base"
             >
               <Download className="h-4 w-4" />
               Download CV
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Mini stats */}

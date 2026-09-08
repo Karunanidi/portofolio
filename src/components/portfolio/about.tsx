@@ -60,10 +60,10 @@ export function TechMarquee() {
 /* ---------------------------------- about ---------------------------------- */
 
 const stats = [
-  { value: 6, suffix: "+", label: "Years of Experience" },
-  { value: 40, suffix: "+", label: "Projects Completed" },
-  { value: 25, suffix: "+", label: "Happy Clients" },
-  { value: 500, suffix: "K+", label: "App Downloads" },
+  { value: 2, suffix: "+", label: "Years of Experience" },
+  { value: 5, suffix: "K+", label: "App Users Reached" },
+  { value: 30, suffix: "%", label: "Crash Rate Reduction" },
+  { value: 100, suffix: "%", label: "On-time Releases" },
 ];
 
 export function About() {
@@ -72,7 +72,7 @@ export function About() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="About Me"
-          title="Passionate builder of web & mobile products"
+          title="Crafting mobile experiences people love to use"
         />
 
         <div className="mt-14 grid gap-12 lg:grid-cols-5 lg:gap-16">

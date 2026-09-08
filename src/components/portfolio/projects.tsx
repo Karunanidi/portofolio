@@ -2,23 +2,21 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Globe, Wallet, LineChart, Map, MessageSquare, UtensilsCrossed, ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { Footprints, Truck, Package, ClipboardCheck, ExternalLink, ArrowUpRight, Smartphone } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import { Reveal } from "./reveal";
 import { projects, projectFilters, type ProjectCategory, type Project } from "@/lib/portfolio-data";
 
 const iconMap: Record<Project["icon"], React.ComponentType<{ className?: string }>> = {
-  globe: Globe,
-  wallet: Wallet,
-  chart: LineChart,
-  map: Map,
-  chat: MessageSquare,
-  food: UtensilsCrossed,
+  run: Footprints,
+  truck: Truck,
+  box: Package,
+  log: ClipboardCheck,
 };
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const Icon = iconMap[project.icon];
-  const categoryLabel = project.category === "android" ? "Android" : "Full-Stack";
+  const categoryLabel = project.category === "android" ? "Android" : "Flutter";
 
   return (
     <motion.article
@@ -55,10 +53,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-3 bg-gradient-to-t from-zinc-950/90 to-transparent pb-4 pt-10"
         >
           <span className="inline-flex min-h-10 items-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-xs font-medium text-zinc-100 backdrop-blur transition-colors hover:bg-emerald-500/25">
-            <ExternalLink className="h-3.5 w-3.5" /> Live Demo
+            <ExternalLink className="h-3.5 w-3.5" /> Details
           </span>
           <span className="inline-flex min-h-10 items-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-xs font-medium text-zinc-100 backdrop-blur transition-colors hover:bg-emerald-500/25">
-            <Github className="h-3.5 w-3.5" /> Source
+            <Smartphone className="h-3.5 w-3.5" /> {project.category === "android" ? "Play Store" : "App"}
           </span>
         </motion.div>
       </div>
@@ -114,7 +112,7 @@ export function Projects() {
         <SectionHeading
           eyebrow="Portfolio"
           title="Featured Projects"
-          description="A selection of products I've designed, engineered and shipped — from scalable web platforms to Android apps with thousands of users."
+          description="Real products shipped to real users — from a fitness app at Telkomsel's Cooltura Run 5K to fleet management modules in production today."
         />
 
         {/* Filter buttons */}
@@ -161,12 +159,12 @@ export function Projects() {
         {/* More link */}
         <Reveal delay={0.2} className="mt-12 text-center">
           <a
-            href="https://github.com"
+            href="https://bit.ly/3Zr3t03"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex min-h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-100 transition-all hover:border-emerald-400/40 hover:bg-emerald-500/10 hover:text-emerald-300 sm:text-base"
           >
-            Explore more on GitHub
+            View full portfolio site
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </Reveal>

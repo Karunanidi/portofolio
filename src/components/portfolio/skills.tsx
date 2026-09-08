@@ -93,7 +93,7 @@ export function Skills() {
         <SectionHeading
           eyebrow="Skills"
           title="Technologies I work with"
-          description="A toolkit refined over 6 years of building production web platforms and native Android apps."
+          description="A toolkit built through shipping production Flutter & Android apps — plus web, database and design skills from my engineering background."
         />
 
         {/* Tabs */}

@@ -51,7 +51,7 @@ export function Footer() {
                 <Code2 className="h-4 w-4" strokeWidth={2.5} />
               </span>
               <span className="font-mono font-semibold text-zinc-200">
-                alex<span className="text-emerald-400">.dev</span>
+                trisna<span className="text-emerald-400">.dev</span>
               </span>
             </button>
 
@@ -79,7 +79,7 @@ export function Footer() {
               using Next.js, Tailwind CSS & Framer Motion
             </p>
             <p className="font-mono text-xs text-zinc-600">
-              © {new Date().getFullYear()} Alex Carter. All rights reserved.
+              © {new Date().getFullYear()} Trisna Nur Arief. All rights reserved.
             </p>
           </div>
         </div>

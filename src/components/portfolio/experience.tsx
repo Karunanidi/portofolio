@@ -17,7 +17,7 @@ export function Experience() {
         <SectionHeading
           eyebrow="Career"
           title="Work Experience"
-          description="Six years of growing from junior web developer to leading full-stack and Android teams."
+          description="From IT support at a 5-star hotel to Flutter development and now native Android — every step sharpened my craft."
         />
 
         <div className="relative mt-16">

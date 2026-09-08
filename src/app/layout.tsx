@@ -14,28 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Carter — Full-Stack & Android Developer",
+  title: "Trisna Nur Arief — Mobile Developer (Flutter & Android)",
   description:
-    "Portfolio of Alex Carter, a full-stack and Android mobile developer crafting responsive web platforms with React/Next.js and native Android apps with Kotlin & Jetpack Compose.",
+    "Portfolio of Trisna Nur Arief, a mobile developer from South Tangerang, Indonesia. Building cross-platform apps with Flutter & native Android — from the Ayo Lari fitness app for Telkomsel's Cooltura Run 5K (5,000+ participants) to IoT-powered fleet management systems at Fleetify.id.",
   keywords: [
-    "Full-Stack Developer",
+    "Trisna Nur Arief",
+    "Mobile Developer",
+    "Flutter Developer",
     "Android Developer",
-    "Kotlin",
-    "Jetpack Compose",
-    "React",
-    "Next.js",
-    "TypeScript",
+    "Firebase",
+    "Fleetify",
+    "Indonesia",
     "Portfolio",
   ],
-  authors: [{ name: "Alex Carter" }],
+  authors: [{ name: "Trisna Nur Arief" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Alex Carter — Full-Stack & Android Developer",
+    title: "Trisna Nur Arief — Mobile Developer (Flutter & Android)",
     description:
-      "I build end-to-end digital products — from responsive web platforms to polished native Android apps.",
-    siteName: "Alex Carter Portfolio",
+      "I craft polished mobile apps with Flutter & native Android — from fitness tracking to IoT-powered fleet management.",
+    siteName: "Trisna Nur Arief Portfolio",
     type: "website",
   },
 };

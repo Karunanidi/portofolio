@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Dribbble, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Globe, MessageCircle, AtSign, Loader2, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import { Reveal, StaggerGroup, StaggerItem } from "./reveal";
 import { contactInfo, socials } from "@/lib/portfolio-data";
@@ -14,10 +14,9 @@ const infoIcons: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  GitHub: Github,
-  LinkedIn: Linkedin,
-  Twitter: Twitter,
-  Dribbble: Dribbble,
+  Portfolio: Globe,
+  WhatsApp: MessageCircle,
+  Email: AtSign,
 };
 
 type FormState = "idle" | "sending" | "sent";

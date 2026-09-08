@@ -71,7 +71,7 @@ export function Navbar() {
             <Code2 className="h-5 w-5" strokeWidth={2.5} />
           </span>
           <span className="font-mono text-lg font-semibold tracking-tight text-zinc-100">
-            alex<span className="text-emerald-400">.dev</span>
+            trisna<span className="text-emerald-400">.dev</span>
           </span>
         </button>
 
