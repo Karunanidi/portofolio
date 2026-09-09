@@ -50,6 +50,11 @@ export default function Contact() {
       value: "mahirka.com",
       href: "https://mahirka.com",
     },
+    {
+      label: "LinkedIn",
+      value: "trisnanurarief",
+      href: "https://www.linkedin.com/in/trisnanurarief",
+    },
   ];
 
   return (

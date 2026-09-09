@@ -5,7 +5,9 @@ export const siteUrl = configuredSiteUrl.replace(/\/$/, "");
 
 export const publicProfiles = {
   github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Karunanidi",
-  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL,
+  linkedin:
+    process.env.NEXT_PUBLIC_LINKEDIN_URL ??
+    "https://www.linkedin.com/in/trisnanurarief",
   playStore: process.env.NEXT_PUBLIC_PLAY_STORE_URL,
 };
 
