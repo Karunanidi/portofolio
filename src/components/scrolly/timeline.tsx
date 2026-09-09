@@ -3,19 +3,11 @@
 import { motion } from "framer-motion";
 import { chapters } from "@/lib/portfolio-data";
 
-/**
- * SCENE 07 — Path.
- * Editorial timeline rows: sticky period column on desktop,
- * rows rise in as they enter the viewport.
- */
 export default function Timeline() {
   return (
     <section id="chapters" data-scene="chapters" className="relative px-5 sm:px-10 pt-24 sm:pt-36 pb-10">
-      <p className="mono-label text-white/40 mb-6">SCENE 07 — PATH</p>
       <h2 className="font-black uppercase tracking-[-0.02em] leading-[0.94] text-[clamp(2.6rem,8vw,7rem)]">
-        The road
-        <br />
-        <span className="text-stroke">so far</span>
+        Experience
       </h2>
 
       <div className="mt-14 sm:mt-20">
@@ -28,7 +20,7 @@ export default function Timeline() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
             className="group border-t border-white/12 last:border-b py-8 sm:py-12 grid gap-5 md:grid-cols-[220px_1fr_1.4fr] lg:grid-cols-[260px_1fr_1.4fr] md:gap-8"
           >
-            {/* period — sticky on desktop */}
+            {/* period stays visible on desktop */}
             <div className="md:sticky md:top-24 self-start">
               <p className="font-mono text-sm text-[#ff4d00] tracking-[0.08em]">
                 {chapter.period}
@@ -36,7 +28,7 @@ export default function Timeline() {
               {chapter.current && (
                 <p className="mono-label mt-2 text-white/45 flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#ff4d00] animate-pulse" />
-                  Now playing
+                  Current role
                 </p>
               )}
             </div>

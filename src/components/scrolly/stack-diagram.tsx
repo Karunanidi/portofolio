@@ -4,12 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { stackFootnote, stackLayers } from "@/lib/portfolio-data";
 
-/**
- * SCENE 03 — Stack.
- * Pinned scene: a mobile-app architecture cross-section that assembles
- * layer-by-layer as you scroll, top (UI) to bottom (Platform).
- */
-
 function Layer({
   index,
   title,
@@ -30,10 +24,7 @@ function Layer({
 
   return (
     <motion.div style={{ opacity: rowOpacity, x: rowX }} className="relative pl-10 sm:pl-16">
-      {/* layer index + rail node */}
-      <span className="absolute left-0 top-1 font-mono text-[10px] text-[#ff4d00] tracking-[0.2em]">
-        L{index + 1}
-      </span>
+      <span className="absolute left-0 top-2 h-2 w-2 bg-[#ff4d00]" aria-hidden />
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <h3 className="font-extrabold uppercase tracking-tight text-lg sm:text-2xl">
           {title}
@@ -91,15 +82,14 @@ export default function StackDiagram() {
         <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-center">
           {/* left panel */}
           <div>
-            <p className="mono-label text-white/40 mb-6">SCENE 03 — STACK</p>
             <h2 className="font-black uppercase leading-[0.95] tracking-[-0.02em] text-[clamp(2.4rem,6vw,5.2rem)]">
-              Under the
+              Beyond the
               <br />
               <span className="text-stroke-signal">pixel</span>
             </h2>
             <p className="mt-6 max-w-sm text-white/55 text-sm sm:text-base leading-relaxed">
-              An app is a stack of promises. This is what holds up every screen
-              I ship — assembled here in the order the user never sees.
+              My work reaches past the screen into product logic, services,
+              synchronized data, and production delivery.
             </p>
             <motion.p
               style={{ opacity: footOpacity }}

@@ -4,12 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { manifesto, manifestoStats } from "@/lib/portfolio-data";
 
-/**
- * SCENE 02 — Who.
- * Pinned scene: the manifesto brightens word-by-word as you scroll,
- * then the receipt stats print in.
- */
-
 function Word({
   word,
   index,
@@ -40,20 +34,12 @@ export default function Manifesto() {
   });
 
   const words = manifesto.split(" ");
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.12], [0, 1]);
   const statsOpacity = useTransform(scrollYProgress, [0.72, 0.88], [0, 1]);
   const statsY = useTransform(scrollYProgress, [0.72, 0.88], [36, 0]);
 
   return (
     <section id="manifesto" data-scene="manifesto" ref={wrapRef} className="relative h-[280vh]">
       <div className="sticky top-0 min-h-svh flex flex-col justify-center px-5 sm:px-10 py-24">
-        <motion.p
-          style={{ opacity: headerOpacity }}
-          className="mono-label text-white/40 mb-10 sm:mb-14"
-        >
-          SCENE 02 — WHO
-        </motion.p>
-
         <p className="max-w-5xl font-bold leading-[1.15] tracking-[-0.01em] text-[clamp(1.7rem,4.6vw,3.9rem)]">
           {words.map((word, i) => (
             <Word

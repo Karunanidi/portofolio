@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { heroTagline, heroWords, persona } from "@/lib/portfolio-data";
 
-/**
- * SCENE 01 — Intro.
- * Giant kinetic type: "I BUILD" + a rotating stack of disciplines.
- * Content parallaxes away as the story begins.
- */
-
-/* Uppercase Archivo Black ≈ 0.68em per char — size each rotating word so
+/* Uppercase Archivo Black is about 0.68em per char. Size each rotating word so
    even the longest one never overflows the viewport. */
 function kineticSize(word: string) {
   const maxVw = Math.min(13.5, 84 / (word.length + 1));
@@ -18,6 +18,7 @@ function kineticSize(word: string) {
 }
 export default function Hero({ active }: { active: boolean }) {
   const [wordIndex, setWordIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -27,13 +28,13 @@ export default function Hero({ active }: { active: boolean }) {
   const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || shouldReduceMotion) return;
     const id = setInterval(
       () => setWordIndex((i) => (i + 1) % heroWords.length),
       2600
     );
     return () => clearInterval(id);
-  }, [active]);
+  }, [active, shouldReduceMotion]);
 
   return (
     <section
@@ -49,14 +50,14 @@ export default function Hero({ active }: { active: boolean }) {
         style={{ background: "radial-gradient(circle, #ff4d00 0%, transparent 65%)" }}
       />
 
-      {/* corner metadata */}
+      {/* compact portfolio context */}
       <div className="relative z-10 pt-20 px-5 sm:px-10 flex justify-between mono-label text-white/35">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={active ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          SCENE 01 — INTRO
+          MOBILE DEVELOPMENT
         </motion.span>
         <motion.span
           className="hidden sm:block"
@@ -64,14 +65,7 @@ export default function Hero({ active }: { active: boolean }) {
           animate={active ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.35, duration: 0.7 }}
         >
-          {persona.coordinates}
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.7 }}
-        >
-          © 2026
+          PORTFOLIO 2026
         </motion.span>
       </div>
 
@@ -86,7 +80,7 @@ export default function Hero({ active }: { active: boolean }) {
           animate={active ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.55, duration: 0.7 }}
         >
-          {persona.name} — {persona.role} · {persona.location}
+          {persona.name} / {persona.role}
         </motion.p>
 
         <h1 className="font-black uppercase leading-[0.92] tracking-[-0.02em]">
@@ -103,7 +97,7 @@ export default function Hero({ active }: { active: boolean }) {
             className="block relative h-[1.02em] overflow-hidden"
             style={{ fontSize: kineticSize(heroWords[wordIndex]) }}
           >
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={wordIndex}
                 className="absolute inset-0 flex items-start font-black uppercase tracking-[-0.02em] text-stroke whitespace-nowrap"
@@ -123,8 +117,7 @@ export default function Hero({ active }: { active: boolean }) {
         </h1>
       </motion.div>
 
-      {/* bottom row: tagline + scroll cue */}
-      <div className="relative z-10 px-5 sm:px-10 pb-32 sm:pb-24 mt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-8">
+      <div className="relative z-10 px-5 sm:px-10 pb-32 sm:pb-24 mt-10">
         <motion.p
           className="max-w-md text-white/60 text-sm sm:text-base leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
@@ -134,18 +127,6 @@ export default function Hero({ active }: { active: boolean }) {
           {heroTagline}
         </motion.p>
 
-        <motion.a
-          href="#manifesto"
-          className="group flex items-center gap-4 mono-label text-white/50 hover:text-[#f2efe9] transition-colors w-fit"
-          initial={{ opacity: 0, y: 20 }}
-          animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.15, duration: 0.8 }}
-        >
-          <span className="relative h-12 w-px bg-white/15 overflow-hidden">
-            <span className="absolute inset-0 bg-[#ff4d00] animate-cue" />
-          </span>
-          Scroll the story
-        </motion.a>
       </div>
     </section>
   );

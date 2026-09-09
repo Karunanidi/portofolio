@@ -1,23 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { workItems, type WorkItem } from "@/lib/portfolio-data";
-
-/**
- * SCENE 05 — Work.
- * The section pins; scrolling drives the shelf sideways past
- * four production projects. Distance is measured, not guessed.
- */
 
 function WorkCard({ item }: { item: WorkItem }) {
   const body = (
-    <>
+    <div className="relative z-10 flex h-full flex-col justify-between">
       <header>
         <div className="flex items-center justify-between mono-label text-white/35">
-          <span>
-            {item.index} / {item.kind}
-          </span>
+          <span>{item.context} / {item.kind}</span>
           <span>{item.year}</span>
         </div>
         <h3 className="mt-6 sm:mt-8 font-black uppercase tracking-[-0.02em] leading-[0.95] text-[clamp(1.9rem,3.6vw,3.4rem)] group-hover:text-[#ff4d00] transition-colors duration-500">
@@ -53,10 +45,24 @@ function WorkCard({ item }: { item: WorkItem }) {
           )}
         </div>
       </footer>
-    </>
+    </div>
   );
 
-  const cls = "group relative flex flex-col justify-between shrink-0 w-[82vw] sm:w-[58vw] lg:w-[44vw] xl:w-[38vw] h-[62vh] sm:h-[64vh] border border-white/12 bg-[#0a0a0a] px-6 sm:px-9 py-7 sm:py-9 hover:border-[#ff4d00]/60 transition-colors duration-500";
+  const cls = "group relative shrink-0 w-[82vw] sm:w-[58vw] lg:w-[44vw] xl:w-[38vw] h-[62vh] sm:h-[64vh] overflow-hidden border border-white/12 bg-[#0a0a0a] px-6 sm:px-9 py-7 sm:py-9 transition-[transform,border-color,background-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:border-[#ff4d00]/60 focus-visible:-translate-y-1.5 focus-visible:border-[#ff4d00]/70 active:translate-y-0";
+
+  const surface = (
+    <>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_12%,rgba(255,77,0,0.14),transparent_38%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100 group-focus-visible:opacity-100"
+      />
+      <span
+        aria-hidden
+        className="absolute left-0 top-0 h-px w-0 bg-[#ff4d00] transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full group-focus-visible:w-full"
+      />
+      {body}
+    </>
+  );
 
   return item.href ? (
     <a
@@ -66,11 +72,11 @@ function WorkCard({ item }: { item: WorkItem }) {
       data-cursor
       className={cls}
     >
-      {body}
+      {surface}
     </a>
   ) : (
     <article data-cursor className={cls}>
-      {body}
+      {surface}
     </article>
   );
 }
@@ -91,48 +97,46 @@ export default function Work() {
       setDistance(Math.max(trackRef.current.scrollWidth - window.innerWidth, 0));
     };
     measure();
+    const resizeObserver = new ResizeObserver(measure);
+    if (trackRef.current) resizeObserver.observe(trackRef.current);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+  const rawX = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+  const x = useSpring(rawX, { stiffness: 130, damping: 32, mass: 0.45 });
   const barScale = useTransform(scrollYProgress, [0.04, 0.96], [0, 1]);
 
   return (
-    <section id="work" data-scene="work" ref={wrapRef} className="relative h-[380vh]">
+    <section id="work" data-scene="work" ref={wrapRef} className="relative h-[350vh]">
       <div className="sticky top-0 h-svh flex flex-col justify-center overflow-hidden">
         {/* heading rides with the intro panel */}
-        <motion.div ref={trackRef} style={{ x }} className="flex items-stretch gap-5 sm:gap-8 px-5 sm:px-10 w-max">
+        <motion.div
+          ref={trackRef}
+          style={{ x }}
+          className="flex items-stretch gap-5 sm:gap-8 px-5 sm:px-10 w-max"
+        >
           {/* intro panel */}
           <div className="shrink-0 w-[80vw] sm:w-[46vw] lg:w-[36vw] flex flex-col justify-center pr-4">
-            <p className="mono-label text-white/40 mb-6">SCENE 05 — WORK</p>
             <h2 className="font-black uppercase tracking-[-0.02em] leading-[0.92] text-[clamp(2.6rem,7vw,5.8rem)]">
               Selected
               <br />
               <span className="text-stroke">work</span>
             </h2>
             <p className="mt-6 max-w-xs text-white/55 text-sm sm:text-base leading-relaxed">
-              Five things I shipped that met real users — four on the job, one
-              of my own. Keep scrolling — the shelf slides sideways.
+              Production work from Ayo Lari and Fleetify, plus Mahirka as my
+              largest independent product so far.
             </p>
-            <div className="mt-8 mono-label text-[#ff4d00] flex items-center gap-3">
-              <span className="h-px w-10 bg-[#ff4d00]" />
-              Drag-free. Just scroll.
-            </div>
           </div>
 
           {workItems.map((item) => (
-            <WorkCard key={item.id ?? item.title} item={item} />
+            <WorkCard key={item.index} item={item} />
           ))}
 
-          {/* outro spacer panel */}
-          <div className="shrink-0 w-[30vw] flex items-center">
-            <p className="font-mono text-white/25 text-[11px] tracking-[0.22em] uppercase leading-loose">
-              → Proof, not promises
-              <br />
-              continues below
-            </p>
-          </div>
+          <div className="shrink-0 w-[18vw]" aria-hidden />
         </motion.div>
 
         {/* progress bar */}

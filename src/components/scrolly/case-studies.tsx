@@ -1,14 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { caseStudies, type CaseStudy } from "@/lib/portfolio-data";
-
-/**
- * SCENE 06 — Proof.
- * Heading, then two case studies implemented as sticky stacking cards:
- * each new card slides up over the previous one, which scales back.
- */
 
 function StackCard({
   cs,
@@ -23,7 +23,8 @@ function StackCard({
 }) {
   const coverStart = (index + 1) / total;
   const coverEnd = Math.min(coverStart + 1 / total, 1);
-  const scale = useTransform(progress, [coverStart, coverEnd], [1, 0.92]);
+  const rawScale = useTransform(progress, [coverStart, coverEnd], [1, 0.94]);
+  const scale = useSpring(rawScale, { stiffness: 150, damping: 34, mass: 0.45 });
   const dim = useTransform(progress, [coverStart, coverEnd], [0, 0.6]);
 
   return (
@@ -33,10 +34,16 @@ function StackCard({
     >
       <motion.article
         style={{ scale }}
-        className="relative w-full max-w-6xl mx-auto border border-white/12 bg-[#0a0a0a] px-6 sm:px-10 lg:px-14 py-8 sm:py-12 max-h-[86svh] overflow-y-auto no-scrollbar"
+        className="relative w-full max-w-6xl mx-auto overflow-y-auto border border-white/12 bg-[linear-gradient(145deg,#0d0d0d_0%,#090909_72%)] px-6 py-8 shadow-[0_30px_90px_rgba(0,0,0,0.38)] sm:px-10 sm:py-12 lg:px-14 max-h-[86svh] no-scrollbar will-change-transform"
       >
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff4d00]/70 to-transparent"
+        />
         <header>
-          <p className="mono-label text-[#ff4d00]">{cs.kicker}</p>
+          <p className="mono-label text-[#ff4d00]">
+            {cs.context} / {cs.kicker}
+          </p>
           <h3 className="mt-4 sm:mt-5 font-black uppercase tracking-[-0.02em] leading-[0.98] text-[clamp(1.7rem,4.2vw,3.6rem)]">
             {cs.title}
           </h3>
@@ -98,17 +105,16 @@ export default function CaseStudies() {
     <section id="proof" data-scene="proof" ref={wrapRef} className="relative">
       {/* heading block */}
       <div className="px-5 sm:px-10 pt-24 sm:pt-36 pb-14 sm:pb-20">
-        <p className="mono-label text-white/40 mb-6">SCENE 06 — PROOF</p>
         <h2 className="font-black uppercase tracking-[-0.02em] leading-[0.94] text-[clamp(2.6rem,8vw,7rem)] max-w-5xl">
-          Proof, <span className="text-stroke-signal">not</span> promises
+          What I <span className="text-stroke-signal">delivered</span>
         </h2>
         <p className="mt-6 max-w-md text-white/55 text-sm sm:text-base leading-relaxed">
-          Three builds that had to work on day one — a race in Bali, a fleet
-          that never sleeps, and a tutor I built myself. Numbers included.
+          Two professional projects grounded in my CV, plus Mahirka as an
+          independent product.
         </p>
       </div>
 
-      {/* stacking cards — container height scales with card count */}
+      {/* stacking cards; container height scales with card count */}
       <div
         className="relative"
         style={{ height: `${caseStudies.length * 100}svh` }}

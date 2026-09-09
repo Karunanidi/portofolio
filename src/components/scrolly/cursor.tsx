@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
  * Custom cursor: a small signal-orange dot with a trailing ring.
- * Desktop (fine pointer) only — hides on touch devices.
+ * Desktop (fine pointer) only; hides on touch devices.
  * Grows over [data-cursor] targets and links/buttons.
  */
 export default function Cursor() {

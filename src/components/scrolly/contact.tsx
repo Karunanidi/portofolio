@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   contactTitle,
@@ -8,33 +8,6 @@ import {
   marqueeWords,
   persona,
 } from "@/lib/portfolio-data";
-
-/**
- * SCENE 08 — Contact.
- * Giant closing CTA with copy-to-clipboard email, editorial link rows,
- * a marquee interlude, and a footer with a live Jakarta clock.
- */
-
-function JakartaClock() {
-  const [time, setTime] = useState("");
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      timeZone: "Asia/Jakarta",
-    });
-    const tick = () => setTime(fmt.format(new Date()));
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <span className="tabular-nums">
-      {time} <span className="text-white/35">WIB</span>
-    </span>
-  );
-}
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -68,7 +41,7 @@ export default function Contact() {
     },
     {
       label: "Download CV",
-      value: "PDF — English",
+      value: "PDF / English",
       href: persona.cvLink,
       download: true,
     },
@@ -92,15 +65,13 @@ export default function Contact() {
           {[...marqueeWords, ...marqueeWords].map((word, i) => (
             <span key={i} className="mono-label text-white/35 flex items-center gap-8">
               {word}
-              <span className="text-[#ff4d00]">✦</span>
+              <span className="text-[#ff4d00]">/</span>
             </span>
           ))}
         </div>
       </div>
 
       <motion.div style={{ y }} className="px-5 sm:px-10 pt-28 sm:pt-40 pb-16">
-        <p className="mono-label text-white/40 mb-8">SCENE 08 — CONTACT</p>
-
         <h2 className="font-black uppercase tracking-[-0.03em] leading-[0.9] text-[clamp(3rem,12.5vw,11rem)]">
           {contactTitle[0]}
           <br />
@@ -116,10 +87,10 @@ export default function Contact() {
             data-cursor
             className="group relative inline-flex items-center gap-3 bg-[#ff4d00] text-[#050505] font-mono font-bold text-xs sm:text-sm tracking-[0.14em] uppercase px-7 sm:px-9 py-4 sm:py-5 hover:bg-[#f2efe9] transition-colors duration-300"
           >
-            {copied ? "Copied ✓" : persona.email}
+            {copied ? "Email copied" : persona.email}
           </button>
           <p className="mono-label text-white/40 max-w-[220px] leading-relaxed">
-            Or keep scrolling back up — the story loops.
+            For Android, Flutter, and product development enquiries.
           </p>
         </div>
 
@@ -153,14 +124,11 @@ export default function Contact() {
       {/* footer */}
       <footer className="px-5 sm:px-10 pb-24 sm:pb-20 pt-10 flex flex-col sm:flex-row justify-between gap-4 mono-label text-white/35">
         <span>{footerNote}</span>
-        <span>
-          Local time — <JakartaClock />
-        </span>
         <a
           href="#intro"
           className="text-white/60 hover:text-[#ff4d00] transition-colors w-fit"
         >
-          Back to top ↑
+          Back to top
         </a>
       </footer>
     </section>

@@ -13,12 +13,12 @@ export default function SmoothScroll() {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReduced) return;
+    const usesTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (prefersReduced || usesTouch) return;
 
     const lenis = new Lenis({
-      lerp: 0.09,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.6,
+      lerp: 0.075,
+      wheelMultiplier: 0.9,
     });
 
     let rafId = 0;
@@ -37,7 +37,7 @@ export default function SmoothScroll() {
       const el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 });
+      lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.15 });
     };
     document.addEventListener("click", onClick);
 

@@ -4,20 +4,16 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const SCENES = [
-  { id: "intro", num: "01", label: "Intro" },
-  { id: "manifesto", num: "02", label: "Who" },
-  { id: "stack", num: "03", label: "Stack" },
-  { id: "process", num: "04", label: "Process" },
-  { id: "work", num: "05", label: "Work" },
-  { id: "proof", num: "06", label: "Proof" },
-  { id: "chapters", num: "07", label: "Path" },
-  { id: "contact", num: "08", label: "Contact" },
+  { id: "intro", label: "Intro" },
+  { id: "manifesto", label: "About" },
+  { id: "stack", label: "Skills" },
+  { id: "process", label: "Approach" },
+  { id: "work", label: "Work" },
+  { id: "proof", label: "Projects" },
+  { id: "chapters", label: "Experience" },
+  { id: "contact", label: "Contact" },
 ] as const;
 
-/**
- * Cinematic HUD: scroll progress hairline (top), brand mark,
- * and a persistent "SCENE 03 / 08 — STACK" indicator (bottom-left).
- */
 export default function Hud() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
@@ -66,27 +62,21 @@ export default function Hud() {
           </a>
           <a
             href="#contact"
-            className="mono-label text-[#f2efe9] hover:text-[#ff4d00] transition-colors flex items-center gap-2"
+            className="mono-label text-[#f2efe9] hover:text-[#ff4d00] transition-colors"
           >
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ff4d00] animate-pulse" />
-            Open to work
+            Contact
           </a>
         </div>
       </header>
 
-      {/* scene indicator */}
+      {/* current section */}
       <div className="fixed bottom-5 left-5 sm:bottom-8 sm:left-10 z-[94] mix-blend-difference pointer-events-none select-none">
         <div className="flex items-center gap-3 font-mono">
           <span className="text-[#ff4d00] text-[11px] tracking-[0.22em]">
-            SCENE {scene.num}
-          </span>
-          <span className="text-white/30 text-[11px] tracking-[0.22em]">/ 08</span>
-          <span className="h-px w-8 bg-white/30" />
-          <span className="text-white text-[11px] tracking-[0.22em] uppercase">
             {scene.label}
           </span>
         </div>
-        {/* segmented scene progress */}
+        {/* segmented portfolio progress */}
         <div className="flex gap-1 mt-2">
           {SCENES.map((s, i) => (
             <span

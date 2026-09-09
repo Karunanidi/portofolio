@@ -1,18 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { bootLines, persona } from "@/lib/portfolio-data";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { bootLines } from "@/lib/portfolio-data";
 
-/**
- * Boot-sequence preloader: mono terminal lines + a % counter,
- * then a two-panel shutter reveal that hands off to the hero.
- * Fully self-unmounting: boot → exit → gone.
- */
+/* A short portfolio index followed by a two-panel reveal. */
 export default function Preloader({ onDone }: { onDone: () => void }) {
   const [count, setCount] = useState(0);
   const [lineCount, setLineCount] = useState(0);
   const [phase, setPhase] = useState<"boot" | "exit" | "gone">("boot");
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -20,16 +17,24 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
     window.scrollTo(0, 0);
 
     const start = performance.now();
-    const DURATION = 1900;
+    const duration = shouldReduceMotion ? 120 : 1450;
+    const exitDelay = shouldReduceMotion ? 0 : 180;
+    const handoffDelay = shouldReduceMotion ? 0 : 360;
+    const unmountDelay = shouldReduceMotion ? 20 : 1250;
     let raf = 0;
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3); // fast boot, soft landing
-      setCount(Math.round(eased * 100));
-      setLineCount(
-        Math.min(Math.floor(eased * bootLines.length) + 1, bootLines.length)
+      const nextCount = Math.round(eased * 100);
+      const nextLineCount = Math.min(
+        Math.floor(eased * bootLines.length) + 1,
+        bootLines.length
+      );
+      setCount((current) => (current === nextCount ? current : nextCount));
+      setLineCount((current) =>
+        current === nextLineCount ? current : nextLineCount
       );
       if (t < 1) {
         raf = requestAnimationFrame(tick);
@@ -37,16 +42,16 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
       }
       setCount(100);
       setLineCount(bootLines.length);
-      timers.push(setTimeout(() => setPhase("exit"), 320));
+      timers.push(setTimeout(() => setPhase("exit"), exitDelay));
       // hero entrance starts while shutters are still opening
       timers.push(
         setTimeout(() => {
           document.body.style.overflow = "";
           onDone();
-        }, 520)
+        }, handoffDelay)
       );
       // remove the overlay from the DOM once shutters are off-screen
-      timers.push(setTimeout(() => setPhase("gone"), 1500));
+      timers.push(setTimeout(() => setPhase("gone"), unmountDelay));
     };
     raf = requestAnimationFrame(tick);
 
@@ -55,7 +60,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
       timers.forEach(clearTimeout);
       document.body.style.overflow = "";
     };
-  }, [onDone]);
+  }, [onDone, shouldReduceMotion]);
 
   return (
     <AnimatePresence>
@@ -66,7 +71,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.2 } }}
         >
-          {/* shutter panels — slide apart on exit */}
+          {/* shutter panels slide apart on exit */}
           <motion.div
             className="absolute inset-x-0 top-0 h-1/2 bg-[#050505] border-b border-white/5"
             animate={phase === "exit" ? { y: "-100%" } : { y: 0 }}
@@ -88,7 +93,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
           >
             <div className="mono-label text-white/40 mb-6 flex justify-between">
               <span>TRISNA.DEV</span>
-              <span>STORY v2.0</span>
+              <span>PORTFOLIO</span>
             </div>
 
             <div className="font-mono text-[11px] sm:text-xs leading-relaxed text-white/55 min-h-[9.5em]">
@@ -99,7 +104,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.15 }}
                 >
-                  <span className="text-[#ff4d00] mr-2">▸</span>
+                  <span className="inline-block h-px w-3 bg-[#ff4d00] mr-2 align-middle" />
                   {line}
                   {i === lineCount - 1 && lineCount < bootLines.length && (
                     <span className="animate-blink-hard ml-1 text-white/80">▌</span>
@@ -108,22 +113,27 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
               ))}
             </div>
 
-            <div className="mt-8 flex items-end justify-between">
+            <div
+              className="mt-8 flex items-end justify-between"
+              role="progressbar"
+              aria-label="Loading portfolio"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={count}
+            >
               <div className="h-px flex-1 bg-white/15 relative overflow-hidden">
                 <div
-                  className="absolute inset-y-0 left-0 bg-[#ff4d00]"
-                  style={{ width: `${count}%` }}
+                  className="absolute inset-0 origin-left bg-[#ff4d00] will-change-transform"
+                  style={{ transform: `scaleX(${count / 100})` }}
                 />
               </div>
-              <span className="font-mono text-2xl sm:text-3xl font-bold tabular-nums ml-4 text-[#f2efe9]">
-                {String(count).padStart(3, "0")}
+              <span className="w-[4.5ch] text-right font-mono text-2xl sm:text-3xl font-bold tabular-nums ml-4 text-[#f2efe9]">
+                {count}
                 <span className="text-[#ff4d00]">%</span>
               </span>
             </div>
 
-            <p className="mono-label text-white/30 mt-6">
-              {persona.location.toUpperCase()} — {persona.coordinates}
-            </p>
+            <p className="mono-label text-white/30 mt-6">TRISNA NUR ARIEF</p>
           </motion.div>
         </motion.div>
       )}

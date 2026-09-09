@@ -15,9 +15,9 @@ const jbMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trisna Nur Arief — I Build Mobile Apps",
+  title: "Trisna Nur Arief | Android and Flutter Developer",
   description:
-    "The story of Trisna Nur Arief, a mobile developer from South Tangerang, Indonesia. Scroll the story: from IT support at a five-star hotel to shipping Flutter & Android apps used by thousands — Ayo Lari for Telkomsel's Cooltura Run 5K, IoT-powered fleet systems at Fleetify.id.",
+    "Portfolio of Trisna Nur Arief, an Android and Flutter developer working on fleet operations software, Ayo Lari for 5,000+ participants, and the independent Mahirka learning product.",
   keywords: [
     "Trisna Nur Arief",
     "Mobile Developer",
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Trisna Nur Arief" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/logo.svg",
   },
   openGraph: {
-    title: "Trisna Nur Arief — I Build Mobile Apps",
+    title: "Trisna Nur Arief | Android and Flutter Developer",
     description:
-      "From first commit to Play Store release. A scroll-told story of shipping Flutter & Android apps for thousands of users.",
+      "Android and Flutter work across fleet operations, Ayo Lari, and the independent Mahirka learning product.",
     siteName: "Trisna Nur Arief",
     type: "website",
   },
