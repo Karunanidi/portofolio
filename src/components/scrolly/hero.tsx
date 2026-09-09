@@ -47,7 +47,7 @@ export default function Hero({ active }: { active: boolean }) {
       <div
         aria-hidden
         className="absolute -top-40 right-[-15%] h-[540px] w-[540px] rounded-full opacity-[0.13] blur-[130px]"
-        style={{ background: "radial-gradient(circle, #ff4d00 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, var(--signal) 0%, transparent 65%)" }}
       />
 
       {/* compact portfolio context */}

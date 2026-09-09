@@ -41,7 +41,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Trisna Nur Arief" }],
   icons: {
-    icon: "/logo.svg",
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
   },
   alternates: {
     canonical: "/",
@@ -81,7 +84,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#eef4ff",
   width: "device-width",
   initialScale: 1,
 };

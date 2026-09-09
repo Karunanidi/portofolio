@@ -18,6 +18,22 @@ export default function Hud() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   const [active, setActive] = useState<string>("intro");
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    const nextIsLight = savedTheme === "light";
+    document.documentElement.classList.toggle("light", nextIsLight);
+    const frame = window.requestAnimationFrame(() => setIsLight(nextIsLight));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextIsLight = !isLight;
+    setIsLight(nextIsLight);
+    document.documentElement.classList.toggle("light", nextIsLight);
+    window.localStorage.setItem("portfolio-theme", nextIsLight ? "light" : "dark");
+  };
 
   useEffect(() => {
     const sections = Array.from(
@@ -60,12 +76,23 @@ export default function Hud() {
           >
             TRISNA<span className="text-[#ff4d00]">.</span>DEV
           </a>
+          <div className="flex items-center gap-5 sm:gap-7">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
+            aria-pressed={isLight}
+            className="mono-label text-[#f2efe9] hover:text-[#ff4d00] transition-colors"
+          >
+            {isLight ? "Dark mode" : "Light mode"}
+          </button>
           <a
             href="#contact"
             className="mono-label text-[#f2efe9] hover:text-[#ff4d00] transition-colors"
           >
             Contact
           </a>
+          </div>
         </div>
       </header>
 
