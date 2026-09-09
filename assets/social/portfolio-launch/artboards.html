@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trisna Nur Arief — Portfolio launch assets</title>
+    <style>
+      :root {
+        --ink: #07101f;
+        --paper: #f4f8ff;
+        --blue: #1262ff;
+        --blue-soft: #dfeaff;
+        --line: rgba(7, 16, 31, 0.14);
+        --muted: #5f6d83;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #cbd5e1;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--ink);
+      }
+
+      body {
+        display: grid;
+        place-items: start;
+      }
+
+      .artboard {
+        position: relative;
+        display: none;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .artboard.is-active {
+        display: block;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(rgba(18, 98, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 98, 255, 0.07) 1px, transparent 1px);
+        background-size: 36px 36px;
+      }
+
+      .eyebrow,
+      .chip,
+      .meta,
+      .url {
+        font-family: "Courier New", Courier, monospace;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand img {
+        display: block;
+        width: 56px;
+        height: 56px;
+        border-radius: 13px;
+        object-fit: cover;
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .browser {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        background: #050505;
+        box-shadow: 0 30px 80px rgba(9, 28, 65, 0.3);
+      }
+
+      .browser-bar {
+        position: absolute;
+        inset: 0 0 auto 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        height: 34px;
+        padding: 0 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(7, 10, 16, 0.9);
+      }
+
+      .browser-bar i {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.36);
+      }
+
+      .browser img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* LinkedIn landscape */
+      #linkedin {
+        width: 1200px;
+        height: 627px;
+        padding: 44px 52px;
+        background: var(--paper);
+      }
+
+      #linkedin::after {
+        content: "";
+        position: absolute;
+        right: -120px;
+        top: -180px;
+        z-index: -1;
+        width: 620px;
+        height: 620px;
+        border-radius: 50%;
+        background: var(--blue-soft);
+        filter: blur(4px);
+      }
+
+      #linkedin .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      #linkedin .status {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--blue);
+        font-family: "Courier New", Courier, monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      #linkedin .status::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--blue);
+        box-shadow: 0 0 0 6px rgba(18, 98, 255, 0.12);
+      }
+
+      #linkedin .copy {
+        position: absolute;
+        left: 52px;
+        top: 153px;
+        width: 505px;
+      }
+
+      #linkedin .eyebrow {
+        color: var(--blue);
+        font-size: 11px;
+      }
+
+      #linkedin h1 {
+        margin: 17px 0 18px;
+        font-size: 64px;
+        line-height: 0.9;
+        letter-spacing: -0.065em;
+        text-transform: uppercase;
+      }
+
+      #linkedin .lead {
+        max-width: 435px;
+        margin: 0;
+        color: #4f5d72;
+        font-size: 17px;
+        line-height: 1.48;
+      }
+
+      #linkedin .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 27px;
+      }
+
+      #linkedin .chip {
+        padding: 9px 11px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        color: #39475d;
+        font-size: 9px;
+      }
+
+      #linkedin .hero-shot {
+        position: absolute;
+        right: -70px;
+        bottom: -46px;
+        width: 650px;
+        height: 474px;
+        transform: rotate(-2deg);
+      }
+
+      #linkedin .hero-shot img {
+        object-position: 49% 50%;
+      }
+
+      #linkedin .index {
+        position: absolute;
+        right: 48px;
+        top: 125px;
+        z-index: 3;
+        padding: 8px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(5, 5, 5, 0.62);
+        color: white;
+        backdrop-filter: blur(8px);
+        font-family: "Courier New", Courier, monospace;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+      }
+
+      /* Square launch cover */
+      #square {
+        width: 1080px;
+        height: 1080px;
+        padding: 58px;
+        background: #05070b;
+        color: #f8fbff;
+      }
+
+      #square::before {
+        content: "";
+        position: absolute;
+        left: -160px;
+        top: -130px;
+        z-index: -1;
+        width: 650px;
+        height: 650px;
+        border-radius: 50%;
+        background: rgba(18, 98, 255, 0.32);
+        filter: blur(110px);
+      }
+
+      #square .grid {
+        opacity: 0.42;
+        background-image:
+          linear-gradient(rgba(95, 150, 255, 0.16) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(95, 150, 255, 0.16) 1px, transparent 1px);
+        background-size: 54px 54px;
+      }
+
+      #square .topline {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      #square .brand-copy span {
+        color: rgba(255, 255, 255, 0.48);
+      }
+
+      #square .meta {
+        color: #7fa9ff;
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: right;
+      }
+
+      #square h1 {
+        position: relative;
+        z-index: 3;
+        width: 900px;
+        margin: 76px 0 0;
+        font-size: 101px;
+        line-height: 0.83;
+        letter-spacing: -0.072em;
+        text-transform: uppercase;
+      }
+
+      #square h1 span {
+        color: #4680ff;
+      }
+
+      #square .square-shot {
+        position: absolute;
+        left: 58px;
+        right: 58px;
+        bottom: -52px;
+        height: 520px;
+      }
+
+      #square .square-shot img {
+        object-position: center 53%;
+      }
+
+      #square .stack-label {
+        position: absolute;
+        right: 82px;
+        bottom: 425px;
+        z-index: 4;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(5, 7, 11, 0.72);
+        color: white;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      /* Portrait project proof */
+      #projects {
+        width: 1080px;
+        height: 1350px;
+        padding: 56px;
+        background: #eef5ff;
+      }
+
+      #projects::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        background: linear-gradient(145deg, #f9fbff 0%, #e7f0ff 70%, #dceaff 100%);
+      }
+
+      #projects .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      #projects .eyebrow {
+        color: var(--blue);
+        font-size: 11px;
+      }
+
+      #projects h1 {
+        max-width: 900px;
+        margin: 53px 0 22px;
+        font-size: 78px;
+        line-height: 0.92;
+        letter-spacing: -0.062em;
+        text-transform: uppercase;
+      }
+
+      #projects .intro {
+        max-width: 790px;
+        margin: 0;
+        color: #536176;
+        font-size: 19px;
+        line-height: 1.5;
+      }
+
+      #projects .project-shot {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        top: 420px;
+        height: 568px;
+        border-color: rgba(7, 16, 31, 0.2);
+        box-shadow: 0 28px 70px rgba(22, 59, 122, 0.24);
+      }
+
+      #projects .project-shot img {
+        object-position: center 52%;
+      }
+
+      #projects .proof {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        bottom: 112px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      #projects .proof article {
+        min-height: 155px;
+        padding: 27px 24px 22px;
+        border-right: 1px solid var(--line);
+      }
+
+      #projects .proof article:first-child {
+        padding-left: 0;
+      }
+
+      #projects .proof article:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      #projects .proof strong {
+        display: block;
+        color: var(--blue);
+        font-size: 34px;
+        letter-spacing: -0.045em;
+      }
+
+      #projects .proof span {
+        display: block;
+        margin-top: 10px;
+        color: #4c5b71;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      #projects .footer {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        bottom: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      #projects .url {
+        color: var(--blue);
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="linkedin" class="artboard" aria-label="LinkedIn portfolio launch image">
+      <div class="grid"></div>
+      <div class="topline">
+        <div class="brand">
+          <img src="tna-logo.png" alt="TNA logo" />
+          <div class="brand-copy">
+            <strong>Trisna Nur Arief</strong>
+            <span>Mobile Application Developer</span>
+          </div>
+        </div>
+        <div class="status">Portfolio live</div>
+      </div>
+
+      <section class="copy">
+        <div class="eyebrow">New portfolio / 2026</div>
+        <h1>Built work.<br />Clearly shown.</h1>
+        <p class="lead">
+          Mobile products first. Modern frontend systems that complete the experience.
+        </p>
+        <div class="chips">
+          <span class="chip">Android + Flutter</span>
+          <span class="chip">Frontend web</span>
+          <span class="chip">Independent products</span>
+        </div>
+      </section>
+
+      <div class="index">01 / Portfolio rebuild</div>
+      <figure class="browser hero-shot">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <img src="site-hero-dark.png" alt="Dark mode of the portfolio homepage" />
+      </figure>
+    </main>
+
+    <main id="square" class="artboard" aria-label="Square portfolio launch image">
+      <div class="grid"></div>
+      <div class="topline">
+        <div class="brand">
+          <img src="tna-logo.png" alt="TNA logo" />
+          <div class="brand-copy">
+            <strong>Trisna Nur Arief</strong>
+            <span>Portfolio / 2026</span>
+          </div>
+        </div>
+        <div class="meta">Mobile first<br />Web capable</div>
+      </div>
+
+      <h1>I build<br /><span>mobile systems.</span></h1>
+      <div class="stack-label">Android / Flutter / Next.js</div>
+      <figure class="browser square-shot">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <img src="site-hero-dark.png" alt="Portfolio hero in dark mode" />
+      </figure>
+    </main>
+
+    <main id="projects" class="artboard" aria-label="Project highlights social image">
+      <div class="grid"></div>
+      <div class="topline">
+        <div class="brand">
+          <img src="tna-logo.png" alt="TNA logo" />
+          <div class="brand-copy">
+            <strong>Trisna Nur Arief</strong>
+            <span>Selected work</span>
+          </div>
+        </div>
+        <div class="eyebrow">02 / Product proof</div>
+      </div>
+
+      <h1>Work that reached real users.</h1>
+      <p class="intro">
+        From public event platforms and fleet operations to Mahirka, my largest independent product so far.
+      </p>
+
+      <figure class="browser project-shot">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <img src="site-mahirka-dark.png" alt="Mahirka project featured in the portfolio" />
+      </figure>
+
+      <section class="proof" aria-label="Selected project outcomes">
+        <article>
+          <strong>5,000+</strong>
+          <span>Ayo Lari event participants supported</span>
+        </article>
+        <article>
+          <strong>30%</strong>
+          <span>Reliability improvement documented in fleet work</span>
+        </article>
+        <article>
+          <strong>Mahirka</strong>
+          <span>Largest independent product build to date</span>
+        </article>
+      </section>
+
+      <div class="footer">
+        <span class="url">Trisna.dev / Selected work</span>
+        <span class="eyebrow">Mobile + frontend</span>
+      </div>
+    </main>
+
+    <script>
+      const requested = new URLSearchParams(window.location.search).get("art") || "linkedin";
+      const active = document.getElementById(requested) || document.getElementById("linkedin");
+      active.classList.add("is-active");
+    </script>
+  </body>
+</html>
