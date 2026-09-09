@@ -84,6 +84,10 @@ export default function Hero({ active }: { active: boolean }) {
         </motion.p>
 
         <h1 className="font-black uppercase leading-[0.92] tracking-[-0.02em]">
+          <span className="sr-only">
+            {persona.name}, {persona.role} and {persona.secondaryRole}
+          </span>
+          <span aria-hidden>
           <motion.span
             className="block text-[clamp(3.4rem,13.5vw,11.5rem)]"
             initial={{ opacity: 0, y: 60 }}
@@ -113,6 +117,7 @@ export default function Hero({ active }: { active: boolean }) {
                 </span>
               </motion.span>
             </AnimatePresence>
+          </span>
           </span>
         </h1>
       </motion.div>

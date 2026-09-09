@@ -3,12 +3,12 @@
 export const persona = {
   name: "Trisna Nur Arief",
   firstName: "Trisna",
-  role: "Android and Flutter Developer",
+  role: "Mobile Application Developer",
+  secondaryRole: "Frontend Web Developer",
   location: "South Tangerang, Indonesia",
   email: "trisna.na@gmail.com",
   whatsapp: "+62 878-7551-9249",
   whatsappLink: "https://wa.me/6287875519249",
-  portfolioLink: "https://bit.ly/3Zr3t03",
   cvLink: "/cv/CV_Trisna_Nur_Arief_Mobile_Developer.pdf",
 };
 

@@ -50,11 +50,6 @@ export default function Contact() {
       value: "mahirka.com",
       href: "https://mahirka.com",
     },
-    {
-      label: "Elsewhere",
-      value: "Portfolio site",
-      href: persona.portfolioLink,
-    },
   ];
 
   return (
@@ -90,7 +85,7 @@ export default function Contact() {
             {copied ? "Email copied" : persona.email}
           </button>
           <p className="mono-label text-white/40 max-w-[220px] leading-relaxed">
-            For Android, Flutter, and product development enquiries.
+            For mobile application and frontend web development enquiries.
           </p>
         </div>
 
